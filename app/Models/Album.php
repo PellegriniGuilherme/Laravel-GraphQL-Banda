@@ -29,7 +29,7 @@ class Album extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'release' => 'date',
+        'release' => 'date:Y-m-d',
         'title' => 'string',
         'description' => 'string'
     ];

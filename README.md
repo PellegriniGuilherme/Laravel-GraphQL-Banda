@@ -17,7 +17,7 @@ A modelagem para esse projeto foi pensada de forma simples:
 - album_id : ID do album (relacionamento varias músicas para um álbum) (bigint(20))
     
 ### Lyrics
-- title: Titulo da Música (levando em consideração o fator idioma a letra pode possuir um titulo em outra língua)
+- title: Titulo da Música (levando em consideração o fator idioma a letra pode possuir um titulo em outro idioma)
 - language: Idioma da letra (varchar: 5) exemplo: 'pt-br', 'en-us', etc...
 - lyric: Letra da musica (text)
 - music_id: ID da musica (relacionamento varias letras para uma música)
