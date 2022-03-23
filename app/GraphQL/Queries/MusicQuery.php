@@ -32,15 +32,15 @@ class MusicQuery extends Query
                 'description' => 'Music id'
             ],
             'duration' => [
-                'type' => Type::nonNull(Type::string()),
+                'type' => Type::string(),
                 'description' => 'Song duration'
             ],
             'composers' => [
-                'type' => Type::nonNull(Type::string()),
+                'type' => Type::string(),
                 'description' => 'Music composers'
             ],
             'producers' => [
-                'type' => Type::nonNull(Type::string()),
+                'type' => Type::string(),
                 'description' => 'Music producers'
             ],
             'limit' => [
@@ -71,9 +71,9 @@ class MusicQuery extends Query
         }
 
         if(isset($args['id'])){
-            return Music::where('id', $args['id'])->get();
+            return Music::where('id', $args['id'])->paginate($limit, ['*'], 'page', $page);
         }
 
-        return Music::with($fields->getRelations())->paginate($limit, ['*'], 'page', $page);
+        return Music::with($with)->paginate($limit, ['*'], 'page', $page);
     }
 }

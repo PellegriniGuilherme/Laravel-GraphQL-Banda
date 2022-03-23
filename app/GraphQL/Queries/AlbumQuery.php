@@ -71,9 +71,9 @@ class AlbumQuery extends Query
         }
 
         if(isset($args['id'])){
-            return Album::where('id', $args['id'])->get();
+            return Album::where('id', $args['id'])->paginate($limit, ['*'], 'page', $page);
         }
 
-        return Album::with($fields->getRelations())->paginate($limit, ['*'], 'page', $page);
+        return Album::with($with)->paginate($limit, ['*'], 'page', $page);
     }
 }

@@ -75,9 +75,9 @@ class LyricQuery extends Query
         }
 
         if(isset($args['id'])){
-            return Lyric::where('id', $args['id'])->get();
+            return Lyric::where('id', $args['id'])->paginate($limit, ['*'], 'page', $page);
         }
 
-        return Lyric::with($fields->getRelations())->paginate($limit, ['*'], 'page', $page);
+        return Lyric::with($with)->paginate($limit, ['*'], 'page', $page);
     }
 }
