@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\GraphQL\Queries;
 
-use App\Models\Music;
+use App\Models\Lyric;
 use Closure;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use GraphQL\Type\Definition\ResolveInfo;
@@ -12,36 +12,40 @@ use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Query;
 use Rebing\GraphQL\Support\SelectFields;
 
-class MusicQuery extends Query
+class LyricQuery extends Query
 {
     protected $attributes = [
-        'name' => 'music',
-        'description' => 'A query the songs'
+        'name' => 'lyric',
+        'description' => 'A query the lyrics'
     ];
 
     public function type(): Type
     {
-        return GraphQL::paginate('Music');
+        return GraphQL::paginate('Lyric');
     }
 
     public function args(): array
     {
         return [
             'id' => [
+                'type' => Type::ID(),
+                'description' => 'Song id'
+            ],
+            'title' => [
+                'type' => Type::string(),
+                'description' => 'Song title'
+            ],
+            'lyric' => [
+                'type' => Type::string(),
+                'description' => 'lyrics'
+            ],
+            'language' => [
+                'type' => Type::string(),
+                'description' => 'Language of music'
+            ],
+            'music_id' => [
                 'type' => Type::int(),
-                'description' => 'Music id'
-            ],
-            'duration' => [
-                'type' => Type::nonNull(Type::string()),
-                'description' => 'Song duration'
-            ],
-            'composers' => [
-                'type' => Type::nonNull(Type::string()),
-                'description' => 'Music composers'
-            ],
-            'producers' => [
-                'type' => Type::nonNull(Type::string()),
-                'description' => 'Music producers'
+                'description' => 'Song Id'
             ],
             'limit' => [
                 'type' => Type::int(),
@@ -71,9 +75,9 @@ class MusicQuery extends Query
         }
 
         if(isset($args['id'])){
-            return Music::where('id', $args['id'])->get();
+            return Lyric::where('id', $args['id'])->get();
         }
 
-        return Music::with($fields->getRelations())->paginate($limit, ['*'], 'page', $page);
+        return Lyric::with($fields->getRelations())->paginate($limit, ['*'], 'page', $page);
     }
 }

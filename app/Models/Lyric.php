@@ -9,6 +9,8 @@ class Lyric extends Model
 {
     use HasFactory;
 
+    protected $table = 'lyrics';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -17,6 +19,7 @@ class Lyric extends Model
     protected $fillable = [
         'title',
         'lyric',
+        'language',
         'music_id',
     ];
 
@@ -27,7 +30,9 @@ class Lyric extends Model
      */
     protected $casts = [
         'title' => 'string',
+        'language' => 'string',
         'lyric' => 'string',
         'music_id' => 'integer'
     ];
+
 }

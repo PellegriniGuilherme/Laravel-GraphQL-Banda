@@ -17,10 +17,11 @@ class CreateLyricsTable extends Migration
         Schema::create('lyrics', function (Blueprint $table) {
             $table->id();
             $table->string('title', 255);
+            $table->string('language', 5);
             $table->text('lyric');
-            $table->timestamps();
-
+            
             $table->foreignIdFor(Music::class);
+            $table->timestamps();
             $table->foreign('music_id')->references('id')->on('musics');
         });
     }

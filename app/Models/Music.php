@@ -9,6 +9,8 @@ class Music extends Model
 {
     use HasFactory;
 
+    protected $table = 'musics';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -16,7 +18,10 @@ class Music extends Model
      */
     protected $fillable = [
         'title',
-        'album_id'
+        'duration',
+        'composers',
+        'producers',
+        'album_id',
     ];
 
     /**
@@ -28,4 +33,9 @@ class Music extends Model
         'title' => 'string',
         'album_id' => 'integer'
     ];
+
+    public function lyrics()
+    {
+        return $this->hasMany(Lyric::class);
+    }
 }

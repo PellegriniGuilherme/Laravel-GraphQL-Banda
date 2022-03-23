@@ -2,7 +2,18 @@
 
 declare(strict_types = 1);
 
+use App\GraphQL\Mutations\AlbumMutation;
+use App\GraphQL\Mutations\LyricMutation;
+use App\GraphQL\Mutations\MusicMutation;
+use App\GraphQL\Mutations\UpdateAlbumMutation;
+use App\GraphQL\Mutations\UpdateLyricMutation;
+use App\GraphQL\Mutations\UpdateMusicMutation;
+use App\GraphQL\Queries\AlbumQuery;
+use App\GraphQL\Queries\LyricQuery;
 use App\GraphQL\Queries\MusicQuery;
+use App\GraphQL\Types\AlbumType;
+use App\GraphQL\Types\LyricType;
+use App\GraphQL\Types\MusicType;
 
 return [
     'route' => [
@@ -35,52 +46,21 @@ return [
         // for pro and con
         'enable' => true,
     ],
-
-    // The schemas for query and/or mutation. It expects an array of schemas to provide
-    // both the 'query' fields and the 'mutation' fields.
-    //
-    // You can also provide a middleware that will only apply to the given schema
-    //
-    // Example:
-    //
-    //  'schemas' => [
-    //      'default' => [
-    //          'controller' => MyController::class . '@method',
-    //          'query' => [
-    //              App\GraphQL\Queries\UsersQuery::class,
-    //          ],
-    //          'mutation' => [
-    //
-    //          ]
-    //      ],
-    //      'user' => [
-    //          'query' => [
-    //              App\GraphQL\Queries\ProfileQuery::class,
-    //          ],
-    //          'mutation' => [
-    //
-    //          ],
-    //          'middleware' => ['auth'],
-    //      ],
-    //      'user/me' => [
-    //          'query' => [
-    //              App\GraphQL\Queries\MyProfileQuery::class,
-    //          ],
-    //          'mutation' => [
-    //
-    //          ],
-    //          'middleware' => ['auth'],
-    //      ],
-    //  ]
-    //
+    
     'schemas' => [
         'default' => [
             'query' => [
-                // ExampleQuery::class,
+                AlbumQuery::class,
                 MusicQuery::class,
+                LyricQuery::class,
             ],
             'mutation' => [
-                // ExampleMutation::class,
+                AlbumMutation::class,
+                UpdateAlbumMutation::class,
+                MusicMutation::class,
+                UpdateMusicMutation::class,
+                LyricMutation::class,
+                UpdateLyricMutation::class,
             ],
             // The types only available in this schema
             'types' => [
@@ -108,9 +88,9 @@ return [
     // ]
     //
     'types' => [
-        // ExampleType::class,
-        // ExampleRelationType::class,
-        // \Rebing\GraphQL\Support\UploadType::class,
+        'Album' => AlbumType::class,
+        'Music' => MusicType::class,
+        'Lyric' => LyricType::class,
     ],
 
     // The types will be loaded on demand. Default is to load all types on each request
