@@ -39,7 +39,7 @@ class UpdateMusicMutation extends Mutation
             ],
             'duration' => [
                 'type' => Type::string(),
-                'description' => 'Song duration',
+                'description' => 'Song duration format: 03:01 (minutes, seconds)',
                 'rules' => ['date_format:H:i']
             ],
             'composers' => [

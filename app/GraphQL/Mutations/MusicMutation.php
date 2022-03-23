@@ -34,7 +34,7 @@ class MusicMutation extends Mutation
             ],
             'duration' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Song duration',
+                'description' => 'Song duration format: 03:01 (minutes, seconds)',
                 'rules' => ['required', 'date_format:H:i']
             ],
             'composers' => [
