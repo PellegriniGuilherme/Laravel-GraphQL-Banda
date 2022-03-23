@@ -78,6 +78,22 @@ class LyricQuery extends Query
             return Lyric::where('id', $args['id'])->paginate($limit, ['*'], 'page', $page);
         }
 
+        if(isset($args['title'])){
+            return Lyric::where('title', $args['title'])->paginate($limit, ['*'], 'page', $page);
+        }
+
+        if(isset($args['lyric'])){
+            return Lyric::where('lyric', $args['lyric'])->paginate($limit, ['*'], 'page', $page);
+        }
+
+        if(isset($args['language'])){
+            return Lyric::where('language', $args['language'])->paginate($limit, ['*'], 'page', $page);
+        }
+
+        if(isset($args['music_id'])){
+            return Lyric::where('music_id', $args['music_id'])->paginate($limit, ['*'], 'page', $page);
+        }
+
         return Lyric::with($with)->paginate($limit, ['*'], 'page', $page);
     }
 }

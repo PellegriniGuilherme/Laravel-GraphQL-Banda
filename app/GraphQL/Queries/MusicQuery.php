@@ -31,6 +31,10 @@ class MusicQuery extends Query
                 'type' => Type::int(),
                 'description' => 'Music id'
             ],
+            'title' => [
+                'type' => Type::string(),
+                'description' => 'Music Title'
+            ],
             'composers' => [
                 'type' => Type::string(),
                 'description' => 'Music composers'
@@ -38,6 +42,10 @@ class MusicQuery extends Query
             'producers' => [
                 'type' => Type::string(),
                 'description' => 'Music producers'
+            ],
+            'album_id' => [
+                'type' => Type::string(),
+                'description' => 'Album ID'
             ],
             'limit' => [
                 'type' => Type::int(),
@@ -70,6 +78,23 @@ class MusicQuery extends Query
             return Music::where('id', $args['id'])->paginate($limit, ['*'], 'page', $page);
         }
 
-        return Music::with($with)->paginate($limit, ['*'], 'page', $page);
+        if(isset($args['title'])){
+            return Music::where('title', $args['title'])->paginate($limit, ['*'], 'page', $page);
+        }
+
+        if(isset($args['composers'])){
+            return Music::where('composers', $args['composers'])->paginate($limit, ['*'], 'page', $page);
+        }
+
+        if(isset($args['producers'])){
+            return Music::where('producers', $args['producers'])->paginate($limit, ['*'], 'page', $page);
+        }
+
+        if(isset($args['album_id'])){
+            return Music::where('album_id', $args['album_id'])->paginate($limit, ['*'], 'page', $page);
+        }
+
+
+        return Music::select($select)->with($with)->paginate($limit, ['*'], 'page', $page);
     }
 }
