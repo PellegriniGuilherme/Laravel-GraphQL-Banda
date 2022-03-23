@@ -74,26 +74,27 @@ class LyricQuery extends Query
             $page = $args['page'];
         }
 
-        if(isset($args['id'])){
-            return Lyric::where('id', $args['id'])->paginate($limit, ['*'], 'page', $page);
-        }
-
-        if(isset($args['title'])){
-            return Lyric::where('title', $args['title'])->paginate($limit, ['*'], 'page', $page);
-        }
-
-        if(isset($args['lyric'])){
-            return Lyric::where('lyric', $args['lyric'])->paginate($limit, ['*'], 'page', $page);
-        }
-
-        if(isset($args['language'])){
-            return Lyric::where('language', $args['language'])->paginate($limit, ['*'], 'page', $page);
-        }
-
-        if(isset($args['music_id'])){
-            return Lyric::where('music_id', $args['music_id'])->paginate($limit, ['*'], 'page', $page);
-        }
-
-        return Lyric::with($with)->paginate($limit, ['*'], 'page', $page);
+        return Lyric::select($select)
+        ->where(function ($query) use ($args) {
+            if(isset($args['id'])){
+                $query->where('id', $args['id']);
+            }
+    
+            if(isset($args['title'])){
+                $query->where('title', $args['title']);
+            }
+    
+            if(isset($args['lyric'])){
+                $query->where('lyric', $args['lyric']);
+            }
+    
+            if(isset($args['language'])){
+                $query->where('language', $args['language']);
+            }
+    
+            if(isset($args['music_id'])){
+                $query->where('music_id', $args['music_id']);
+            }
+        })->paginate($limit, ['*'], 'page', $page);
     }
 }

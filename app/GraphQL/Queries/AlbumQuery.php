@@ -70,23 +70,24 @@ class AlbumQuery extends Query
             $page = $args['page'];
         }
 
-        if(isset($args['id'])){
-            return Album::where('id', $args['id'])->paginate($limit, ['*'], 'page', $page);
-        }
-
-        if(isset($args['title'])){
-            return Album::where('title', $args['title'])->paginate($limit, ['*'], 'page', $page);
-        }
-
-        if(isset($args['description'])){
-            return Album::where('description', $args['description'])->paginate($limit, ['*'], 'page', $page);
-        }
-
-        if(isset($args['release'])){
-            return Album::where('release', $args['release'])->paginate($limit, ['*'], 'page', $page);
-        }
-
-
-        return Album::with($with)->paginate($limit, ['*'], 'page', $page);
+        
+        return Album::select($select)
+        ->where(function ($query) use ($args) {
+            if(isset($args['id'])){
+                $query->where('id', $args['id']);
+            }
+    
+            if(isset($args['title'])){
+                $query->where('title', $args['title']);
+            }
+    
+            if(isset($args['description'])){
+                $query->where('description', $args['description']);
+            }
+    
+            if(isset($args['release'])){
+                $query->where('release', $args['release']);
+            }
+        })->paginate($limit, ['*'], 'page', $page);
     }
 }

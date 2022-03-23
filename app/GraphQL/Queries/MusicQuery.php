@@ -44,7 +44,7 @@ class MusicQuery extends Query
                 'description' => 'Music producers'
             ],
             'album_id' => [
-                'type' => Type::string(),
+                'type' => Type::int(),
                 'description' => 'Album ID'
             ],
             'limit' => [
@@ -74,27 +74,28 @@ class MusicQuery extends Query
             $page = $args['page'];
         }
 
-        if(isset($args['id'])){
-            return Music::where('id', $args['id'])->paginate($limit, ['*'], 'page', $page);
-        }
 
-        if(isset($args['title'])){
-            return Music::where('title', $args['title'])->paginate($limit, ['*'], 'page', $page);
-        }
+        return Music::select($select)
+        ->where(function ($query) use ($args) {
+            if(isset($args['id'])){
+                $query->where('id', $args['id']);
+            }
 
-        if(isset($args['composers'])){
-            return Music::where('composers', $args['composers'])->paginate($limit, ['*'], 'page', $page);
-        }
+            if(isset($args['title'])){
+                $query->where('title', $args['title']);
+            }
 
-        if(isset($args['producers'])){
-            return Music::where('producers', $args['producers'])->paginate($limit, ['*'], 'page', $page);
-        }
+            if(isset($args['composers'])){
+                $query->where('composers', $args['composers']);
+            }
 
-        if(isset($args['album_id'])){
-            return Music::where('album_id', $args['album_id'])->paginate($limit, ['*'], 'page', $page);
-        }
+            if(isset($args['producers'])){
+                $query->where('producers', $args['producers']);
+            }
 
-
-        return Music::select($select)->with($with)->paginate($limit, ['*'], 'page', $page);
+            if(isset($args['album_id'])){
+                $query->where('album_id', $args['album_id']);
+            }
+        })->paginate($limit, ['*'], 'page', $page);
     }
 }
