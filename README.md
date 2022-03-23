@@ -5,19 +5,19 @@
 _Models_
 A modelagem para esse projeto foi pensada de forma simples.
 
-##### Abums
+### Abums
 - title: Titulo do álbum (varchar: 255)
 - description: Descrição do álbum (text)
 - release: Data de lançamento do álbum (date)
 
-##### Musics
+### Musics
 - title: Titulo da música (varchar: 255)
 - duration: Duração da música (time)
 - composers: Campo de texto para inserir todos os compositoes envolvidos nessa musica (varchar: 255)
 - producers: Campo de texto para inserir todos os produtores envolvidos nessa musica (varchar: 255)
 - album_id : ID do album (relacionamento varias músicas para um álbum) (bigint(20))
     
-##### Lyrics
+### Lyrics
 - title: Titulo da Música (levando em consideração o fato língua a letra possuira um titulo em outra língua)
 - language: Língua da letra (varchar: 5) exemplo: 'pt-br', 'en-us', etc...
 - lyric: Letra da musica (text)
