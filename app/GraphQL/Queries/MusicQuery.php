@@ -31,10 +31,6 @@ class MusicQuery extends Query
                 'type' => Type::int(),
                 'description' => 'Music id'
             ],
-            'duration' => [
-                'type' => Type::string(),
-                'description' => 'Song duration'
-            ],
             'composers' => [
                 'type' => Type::string(),
                 'description' => 'Music composers'

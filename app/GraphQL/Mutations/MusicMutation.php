@@ -32,11 +32,6 @@ class MusicMutation extends Mutation
                 'description' => 'Song title',
                 'rules' => ['max: 255', 'required']
             ],
-            'duration' => [
-                'type' => Type::nonNull(Type::string()),
-                'description' => 'Song duration format: 03:01 (minutes, seconds)',
-                'rules' => ['required', 'date_format:H:i']
-            ],
             'composers' => [
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'Music composers',

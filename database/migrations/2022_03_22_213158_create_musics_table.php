@@ -17,7 +17,6 @@ class CreateMusicsTable extends Migration
         Schema::create('musics', function (Blueprint $table) {
             $table->id();
             $table->string('title', 255);
-            $table->time('duration');
             $table->string('composers', 255);
             $table->string('producers', 255);
             $table->foreignIdFor(Album::class);

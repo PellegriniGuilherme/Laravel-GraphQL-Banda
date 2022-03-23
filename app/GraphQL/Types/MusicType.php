@@ -27,10 +27,6 @@ class MusicType extends GraphQLType
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'Song title'
             ],
-            'duration' => [
-                'type' => Type::nonNull(Type::string()),
-                'description' => 'Song duration'
-            ],
             'composers' => [
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'Music composers'
